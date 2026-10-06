@@ -26,18 +26,6 @@ SQL/        ecommerce.sql - table definitions (applied automatically)
 The database `shopease` and its tables are created automatically on the first request (fresh XAMPP defaults:
 user `root`, empty password). Browse the data at http://localhost/phpmyadmin (needs Apache running).
 
-### If something goes wrong
-
-The register/login form shows the real cause while you run `npm run dev` (for example "Database connection failed:
-... Access denied"). Common ones:
-
-| Message | Fix |
-|---|---|
-| `Connection refused` / `No connection could be made` | MySQL is not started in XAMPP |
-| `Access denied for user 'root'` | You set a MySQL password: copy `backend/.env.example` to `backend/.env` and set `DB_PASS="..."` |
-| `Old database layout found` | Your `shopease` database comes from the first version of this project. In phpMyAdmin drop it (only test data), reload the page |
-| `could not find driver` | In `C:\xampp\php\php.ini` make sure `extension=pdo_mysql` has no leading `;`, then restart |
-
 ## Security
 
 - Passwords: `password_hash` (bcrypt), 8-72 characters with a letter and a number, rehashed automatically when the algorithm improves.
@@ -46,10 +34,8 @@ The register/login form shows the real cause while you run `npm run dev` (for ex
 - CSRF: state-changing requests must carry `X-Requested-With: fetch`; cross-origin callers need a CORS preflight that only `ALLOWED_ORIGINS` pass.
 - The browser never sends a user id or a price. Cart, wishlist and orders use the session user and prices/discounts/stock from `catalog.json`.
 - Every query is a prepared statement; API responses are JSON-only with `nosniff`, `X-Frame-Options: DENY`, a locked-down CSP and `no-store`.
-- Errors are logged server-side; clients get a generic message (details only on the local `php -S` dev server).
 
 After editing `frontend/src/data/products.js`, run `npm run catalog` (it also runs automatically before `npm run dev`).
-The old database password was committed to the repository earlier - change your MySQL root password if it was ever real.
 
 ## Production notes
 
