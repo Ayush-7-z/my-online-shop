@@ -1,0 +1,20 @@
+.wishlist-page {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem) 1.25rem;
+}
+
+.wishlist-page h1 { font-size: var(--step-2); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+
+.wishlist-empty { text-align: center; padding: 4rem 0; color: var(--text-2); }
+.wishlist-empty a { color: var(--accent); }
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 480px) {
+  .wishlist-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+}

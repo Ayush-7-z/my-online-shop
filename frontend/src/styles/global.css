@@ -1,0 +1,46 @@
+:root {
+  /* palette: deep slate + one vibrant accent */
+  --bg: #0c0e14;
+  --surface: #141824;
+  --surface-2: #1b2133;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f2f4fa;
+  --text-2: #9aa3b8;
+  --text-3: #626b82;
+  --accent: #6c7bf7;
+  --accent-hover: #5a6af0;
+  --accent-soft: rgba(108, 123, 247, 0.14);
+  --danger: #f26d5f;
+  --success: #34c98e;
+
+  --danger-hover: #d95a4d;
+
+  /* fluid type scale */
+  --step-0: clamp(0.94rem, 0.88rem + 0.3vw, 1rem);
+  --step-1: clamp(1.13rem, 1rem + 0.6vw, 1.25rem);
+  --step-2: clamp(1.35rem, 1.15rem + 1vw, 1.6rem);
+  --step-3: clamp(1.7rem, 1.4rem + 1.6vw, 2.25rem);
+
+  --radius-s: 8px;
+  --radius: 12px;
+  --radius-l: 20px;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 16px 44px rgba(0, 0, 0, 0.5);
+  --max: 1200px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Plus Jakarta Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: var(--step-0);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+::selection { background: var(--accent); color: #fff; }
