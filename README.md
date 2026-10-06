@@ -23,12 +23,6 @@ SQL/        ecommerce.sql - table definitions (applied automatically)
     ```
 4. Open http://localhost:5173 and register.
 
-Other scripts: `npm run build` (production build), `npm run lint` (eslint), `npm run catalog` (re-export `backend/config/catalog.json` from the products data).
-
-## Design
-
-Dark slate theme with a single indigo accent (`#6c7bf7`), Plus Jakarta Sans typography, fluid `clamp()`-based type and spacing, sticky glassmorphic cart/checkout summaries, hover lift + image zoom on product cards, swipe-to-close full-screen image viewer, and mobile-first responsive grids throughout.
-
 The database `shopease` and its tables are created automatically on the first request (fresh XAMPP defaults:
 user `root`, empty password). Browse the data at http://localhost/phpmyadmin (needs Apache running).
 
