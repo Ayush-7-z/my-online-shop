@@ -16,12 +16,18 @@ SQL/        ecommerce.sql - table definitions (applied automatically)
 2. Make sure PHP is on your PATH: open a new terminal and run `php -v`. If it is not found, add `C:\xampp\php` to PATH.
    `php -m` should list `pdo_mysql`.
 3. Start the project:
-   ```bash
-   cd frontend
-   npm install
-   npm run dev      # Vite on :5173 + PHP API on :8000
-   ```
+    ```bash
+    cd frontend
+    npm install
+    npm run dev      # Vite on :5173 + PHP API on :8000
+    ```
 4. Open http://localhost:5173 and register.
+
+Other scripts: `npm run build` (production build), `npm run lint` (eslint), `npm run catalog` (re-export `backend/config/catalog.json` from the products data).
+
+## Design
+
+Dark slate theme with a single indigo accent (`#6c7bf7`), Plus Jakarta Sans typography, fluid `clamp()`-based type and spacing, sticky glassmorphic cart/checkout summaries, hover lift + image zoom on product cards, swipe-to-close full-screen image viewer, and mobile-first responsive grids throughout.
 
 The database `shopease` and its tables are created automatically on the first request (fresh XAMPP defaults:
 user `root`, empty password). Browse the data at http://localhost/phpmyadmin (needs Apache running).
