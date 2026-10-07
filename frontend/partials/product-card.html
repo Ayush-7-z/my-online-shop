@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-img">
+    <a href="/product.html?id={{p.id}}">
+      <img
+        ng-src="{{p.image}}"
+        alt="{{p.name}}"
+        onerror="
+          this.onerror = null;
+          this.src = '/images/placeholder.svg';
+        "
+      />
+    </a>
+    <span class="discount-badge" ng-if="p.discount > 0">-{{p.discount}}%</span>
+  </div>
+  <div class="card-body">
+    <p class="card-brand">{{p.brand}}</p>
+    <p class="card-name">{{p.name}}</p>
+    <p class="stars">
+      {{'★'.repeat(p.rating | number:0)}}
+      <span style="color: var(--text-2)">{{p.rating}}</span>
+    </p>
+    <div class="price-row">
+      <span class="price">{{p | price | rupee}}</span>
+      <span class="price-old" ng-if="p.discount > 0">{{p.price | rupee}}</span>
+    </div>
+    <a class="btn btn-ghost" href="/product.html?id={{p.id}}">View Details</a>
+    <button class="btn btn-primary" type="button" ng-click="addToCart(p)">
+      Add to Cart
+    </button>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" ng-app="shopease">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - ShopEase</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/vendor/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+  </head>
+  <body>
+    <div ng-include="'/partials/header.html'"></div>
+    <main class="page" style="max-width: 600px">
+      <h1>Contact Us</h1>
+      <form
+        class="page"
+        style="padding: 1.5rem 0"
+        onsubmit="
+          event.preventDefault();
+          this.innerHTML =
+            '<div class=\'alert alert-info\'>Thanks! We will get back to you soon.</div>';
+        "
+      >
+        <div class="field"><label>Name</label><input required /></div>
+        <div class="field">
+          <label>Email</label><input type="email" required />
+        </div>
+        <div class="field">
+          <label>Message</label><textarea rows="4" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </main>
+    <div ng-include="'/partials/footer.html'"></div>
+  </body>
+</html>

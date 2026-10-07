@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" ng-app="shopease">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product - ShopEase</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/vendor/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+  </head>
+  <body>
+    <div ng-include="'/partials/header.html'"></div>
+
+    <main class="page" ng-controller="ProductCtrl">
+      <a
+        href="/products.html"
+        style="color: var(--text-2); text-decoration: none"
+        >&larr; Back to Products</a
+      >
+      <p class="empty" ng-if="!product">Loading...</p>
+
+      <div class="detail" ng-if="product">
+        <div class="detail-media">
+          <img
+            ng-src="{{product.image}}"
+            alt="{{product.name}}"
+            img-fallback
+          />
+        </div>
+        <div>
+          <p class="tag">{{product.brand}}</p>
+          <h1>{{product.name}}</h1>
+          <p class="stars">
+            {{'★'.repeat(product.rating | number:0)}}
+            <span style="color: var(--text-2)"
+              >{{product.rating}} · {{product.stock}} in stock</span
+            >
+          </p>
+
+          <div class="price-row" style="margin-top: 1rem">
+            <span class="price" style="font-size: 1.8rem"
+              >{{product | price | rupee}}</span
+            >
+            <span class="price-old" ng-if="product.discount > 0"
+              >{{product.price | rupee}}</span
+            >
+            <span class="badge-off" ng-if="product.discount > 0"
+              >-{{product.discount}}%</span
+            >
+          </div>
+
+          <div class="spec-chips">
+            <span
+              class="chip"
+              ng-repeat="(k, v) in product.specs"
+              ng-if="k !== 'RAM'"
+              >{{k}}: {{v}}</span
+            >
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; margin: 1rem 0 1.5rem">
+            <button
+              class="btn btn-primary"
+              type="button"
+              ng-click="addToCart()"
+              style="flex: 1"
+            >
+              Add to Cart
+            </button>
+            <button
+              class="btn btn-ghost"
+              type="button"
+              ng-click="addToWishlist()"
+            >
+              Wishlist
+            </button>
+          </div>
+          <div class="alert alert-info" ng-if="msg">{{msg}}</div>
+
+          <div class="acc" ng-class="{open: showSpecs !== false}">
+            <button type="button" ng-click="showSpecs = !showSpecs">
+              Specifications <span class="chev">▾</span>
+            </button>
+            <div class="acc-body">
+              <div>
+                <table>
+                  <tr ng-repeat="(k, v) in product.specs">
+                    <td>{{k}}</td>
+                    <td>{{v}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc" ng-class="{open: showShip}">
+            <button type="button" ng-click="showShip = !showShip">
+              Shipping & Returns <span class="chev">▾</span>
+            </button>
+            <div class="acc-body">
+              <div>
+                Free delivery above ₹500. 3–5 business days. 7-day returns.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div ng-include="'/partials/footer.html'"></div>
+  </body>
+</html>

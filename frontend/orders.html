@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" ng-app="shopease">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders - ShopEase</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/vendor/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+  </head>
+  <body>
+    <div ng-include="'/partials/header.html'"></div>
+
+    <main class="page" ng-controller="OrdersCtrl">
+      <h1>My Orders</h1>
+      <p class="empty" ng-if="orders && orders.length === 0">
+        No orders yet.
+        <a href="/products.html" style="color: var(--accent)">Start shopping</a>
+      </p>
+
+      <div class="order-card" ng-repeat="o in orders">
+        <div class="order-head">
+          <div>
+            <strong>Order #{{o.id}}</strong>
+            <span class="order-date">{{o.created_at | date:'mediumDate'}}</span>
+          </div>
+          <span
+            class="badge-status"
+            style="background:{{o.status === 'confirmed' ? 'var(--success)' : 'var(--accent)'}}"
+            >{{o.status}}</span
+          >
+        </div>
+        <p class="order-address">Deliver to: {{o.address}}</p>
+        <table>
+          <tr ng-repeat="it in o.items">
+            <td>{{it.name}} × {{it.quantity}}</td>
+            <td style="text-align: right">
+              {{it.price * it.quantity | rupee}}
+            </td>
+          </tr>
+        </table>
+        <p style="text-align: right; margin-top: 0.5rem">
+          <strong>Total: {{o.total_amount | rupee}}</strong>
+        </p>
+      </div>
+    </main>
+
+    <div ng-include="'/partials/footer.html'"></div>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" ng-app="shopease">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - ShopEase</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/vendor/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+  </head>
+  <body>
+    <div ng-include="'/partials/header.html'"></div>
+
+    <main class="page" ng-controller="CheckoutCtrl">
+      <h1>Checkout</h1>
+      <div class="alert alert-error" ng-if="error">{{error}}</div>
+
+      <div class="split">
+        <form ng-submit="place()" class="checkout-form">
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" ng-model="user.name" disabled />
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" ng-model="user.email" disabled />
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" ng-model="user.phone" disabled />
+          </div>
+          <div class="field">
+            <label>Delivery Address</label>
+            <textarea
+              ng-model="address"
+              rows="4"
+              required
+              placeholder="Street, City, State, Pincode"
+            ></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width: 100%">
+            Place Order {{total | rupee}}
+          </button>
+        </form>
+
+        <aside class="summary">
+          <h2>Order Summary</h2>
+          <div
+            class="item-card"
+            ng-repeat="item in items"
+            style="padding: 0.75rem; margin-bottom: 0.75rem"
+          >
+            <img
+              ng-src="{{item.image}}"
+              alt="{{item.name}}"
+              style="width: 52px; height: 52px"
+              img-fallback
+            />
+            <div style="flex: 1">
+              <p class="item-name" style="font-size: 0.85rem">{{item.name}}</p>
+              <p class="item-brand">Qty: {{item.qty}}</p>
+            </div>
+          </div>
+          <div class="srow">
+            <span>Subtotal</span><span>{{subtotal | rupee}}</span>
+          </div>
+          <div class="srow">
+            <span>GST (18%)</span><span>{{gst | rupee}}</span>
+          </div>
+          <div class="srow">
+            <span>Delivery</span
+            ><span>{{delivery === 0 ? 'Free' : '₹49'}}</span>
+          </div>
+          <div class="srow-total">
+            <span>Total</span><span>{{total | rupee}}</span>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <div ng-include="'/partials/footer.html'"></div>
+  </body>
+</html>

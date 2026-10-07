@@ -1,0 +1,24 @@
+<nav class="navbar" ng-controller="HeaderCtrl">
+  <div class="navbar-inner">
+    <a href="/index.html" class="logo">ShopEase</a>
+    <form class="nav-search" ng-submit="goSearch()">
+      <input type="text" placeholder="Search products..." ng-model="search" />
+      <button type="submit">Search</button>
+    </form>
+    <div class="nav-links">
+      <a href="/index.html">Home</a>
+      <a href="/products.html">Products</a>
+      <a href="/cart.html"
+        >Cart
+        <span class="nav-badge" ng-if="cartCount > 0">{{cartCount}}</span></a
+      >
+      <a href="/wishlist.html"
+        >Wishlist
+        <span class="nav-badge" ng-if="wishCount > 0">{{wishCount}}</span></a
+      >
+      <a href="/orders.html" ng-if="user">Orders</a>
+      <a href="/login.html" ng-if="!user">Login</a>
+      <button type="button" ng-if="user" ng-click="logout()">Logout</button>
+    </div>
+  </div>
+</nav>

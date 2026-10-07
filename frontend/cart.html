@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" ng-app="shopease">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - ShopEase</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/vendor/angular.min.js"></script>
+    <script src="/js/app.js"></script>
+  </head>
+  <body>
+    <div ng-include="'/partials/header.html'"></div>
+
+    <main class="page" ng-controller="CartCtrl">
+      <div class="cart-head">
+        <h1>Cart</h1>
+        <button
+          class="btn btn-danger"
+          type="button"
+          ng-click="clear()"
+          ng-if="items.length"
+        >
+          Clear Cart
+        </button>
+      </div>
+
+      <p class="empty" ng-if="items && items.length === 0">
+        Your cart is empty.
+        <a href="/products.html" style="color: var(--accent)">Shop now</a>
+      </p>
+
+      <div class="split" ng-if="items && items.length">
+        <div>
+          <div class="item-card" ng-repeat="item in items">
+            <img
+              ng-src="{{item.image}}"
+              alt="{{item.name}}"
+              img-fallback
+            />
+            <div style="flex: 1">
+              <p class="item-name">{{item.name}}</p>
+              <p class="item-brand">{{item.brand}}</p>
+              <p><strong>{{unit(item) | rupee}}</strong></p>
+            </div>
+            <div class="qty">
+              <button type="button" ng-click="qty(item, -1)">−</button>
+              <span>{{item.qty}}</span>
+              <button type="button" ng-click="qty(item, 1)">+</button>
+            </div>
+            <p style="min-width: 5rem; text-align: right">
+              <strong>{{unit(item) * item.qty | rupee}}</strong>
+            </p>
+            <button
+              class="btn btn-danger"
+              type="button"
+              ng-click="remove(item)"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <aside class="summary">
+          <h2>Order Summary</h2>
+          <div class="srow">
+            <span>Subtotal</span><span>{{subtotal() | rupee}}</span>
+          </div>
+          <div class="srow">
+            <span>GST (18%)</span><span>{{subtotal() * 0.18 | rupee}}</span>
+          </div>
+          <div class="srow">
+            <span>Delivery</span
+            ><span>{{subtotal() >= 500 ? 'Free' : '₹49'}}</span>
+          </div>
+          <div class="srow-total">
+            <span>Total</span
+            ><span
+              >{{(subtotal() * 1.18 + (subtotal() >= 500 ? 0 : 49)) |
+              rupee}}</span
+            >
+          </div>
+          <a
+            class="btn btn-primary"
+            style="display: block; margin-top: 1.25rem"
+            href="/checkout.html"
+            >Proceed to Checkout</a
+          >
+        </aside>
+      </div>
+    </main>
+
+    <div ng-include="'/partials/footer.html'"></div>
+  </body>
+</html>

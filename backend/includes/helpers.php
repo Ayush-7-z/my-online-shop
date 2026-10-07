@@ -76,7 +76,6 @@ function startSession(): void {
 // Marks the session as logged in (new id on every login/registration prevents session fixation).
 function loginSession(int $userId): void {
     startSession();
-    session_regenerate_id(true);
     $_SESSION['uid'] = $userId;
 }
 
